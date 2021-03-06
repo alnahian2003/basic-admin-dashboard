@@ -1,0 +1,249 @@
+// Rubik Font
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap");
+
+// Default CSS
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
+
+.bg-teal {
+  background: var(--teal);
+}
+.text-teal {
+  color: var(--teal);
+}
+
+img {
+  user-select: none;
+  pointer-events: none;
+}
+
+// CSS Variables
+$transition: 0.3s;
+$marginTop: 70px;
+
+// Colors
+$colors: (
+  "primary": "#20c997",
+  "secondary": "#333333",
+  "primaryText": "#2b2b2b",
+  "secondaryText": "#ffffff",
+);
+// SCSS Functions
+@function rem($value) {
+  @return unquote(($value/1px)/16+"rem");
+}
+
+@each $colorNames, $colorValue in $colors {
+  .bg-#{$colorNames} {
+    background-color: #{$colorValue};
+  }
+  .text-#{$colorNames} {
+    color: #{$colorValue};
+  }
+}
+
+// Base Styles
+
+body {
+  @extend .bg-secondaryText;
+  @extend .text-primaryText;
+}
+
+// Header Navbar
+
+nav {
+  .navbar-brand {
+    font-size: rem(32px) !important;
+  }
+  .nav-item {
+    .nav-link {
+      color: #ffffff !important;
+      text-align: center;
+      &:hover {
+        color: #ffffff90 !important;
+      }
+    }
+  }
+}
+
+.dropdown-menu {
+  .dropdown-item {
+    @extend .text-primaryText;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    &:hover {
+      background: var(--teal);
+      color: var(--white);
+    }
+  }
+  .dropdown-divider {
+    height: 0;
+    margin: 0.5rem 0;
+    overflow: hidden;
+    border-top: 1px solid #e9ecef;
+  }
+}
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.nav-link {
+  color: var(--white);
+}
+
+// Wrapper
+.wrapper {
+  margin-top: rem($marginTop);
+
+  // Sidebar
+  .side-menu {
+    @extend .bg-secondary;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: rem($marginTop) auto auto;
+    padding-top: rem(20px);
+    width: rem(200px);
+    transition: all ease $transition;
+    transform: translateX(-100%);
+    z-index: 200;
+
+    .sidebar {
+      .navbar-nav {
+        .nav-item {
+          @extend .text-secondaryText;
+          &:hover {
+            .nav-link {
+              padding-left: 10px;
+              transition: $transition;
+            }
+          }
+          .nav-link {
+            display: block;
+            white-space: nowrap;
+            &:hover,
+            &:active,
+            &:focus {
+              @extend .bg-primary;
+              .side-menu-icon {
+                @extend .text-secondaryText;
+              }
+              .text {
+                @extend .text-secondary;
+              }
+            }
+            .text {
+              line-height: 0;
+              @extend .text-secondaryText;
+              font-size: rem(16px);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .side-menu-icon {
+    margin-right: rem(5px);
+    font-size: rem(20px);
+    height: rem(25px);
+    width: rem(25px);
+    @extend .text-primary;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      transform: rotate(-180deg);
+      transition: 0.5s ease;
+    }
+  }
+
+  &.expand {
+    .side-menu {
+      transform: translateX(0);
+    }
+    .nav-item {
+      padding-left: -10px !important;
+    }
+  }
+
+  // Main Content
+  .main-content {
+    width: 100%;
+    margin-left: rem(0px);
+    transition: all ease $transition;
+  }
+}
+
+// Show Sidebar on The Devices Above 992px
+@media (min-width: 992px) {
+  .wrapper {
+    .side-menu {
+      transform: translateX(0);
+    }
+
+    .main-content {
+      margin-left: rem(200px);
+    }
+    &.expand {
+      .side-menu {
+        width: rem(80px);
+
+        .nav-link {
+          text-align: center !important;
+          .side-menu-icon {
+            margin-right: 0;
+          }
+          .text {
+            display: none;
+          }
+        }
+      }
+      .main-content {
+        margin-left: rem(80px);
+      }
+    }
+  }
+}
+
+// Resonsive Codes
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  nav {
+    .navbar-brand {
+      font-size: 1.5rem !important;
+    }
+  }
+  .navbar-search {
+    display: none;
+  }
+
+  .wrapper {
+    .side-menu {
+      margin: rem(50px) auto auto auto !important;
+    }
+  }
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+}
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+}
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
